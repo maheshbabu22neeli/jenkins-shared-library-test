@@ -6,7 +6,7 @@ def call(Map configMap) {
             }
         }
         environment {
-            project = "roboshop"
+            project = "${configMap.project}"
             course = "devOps"
             APP_VERSION = ""
             AWS_ACCOUNT_ID = "204427113986"
@@ -32,6 +32,8 @@ def call(Map configMap) {
             stage('Read Version') {
                 steps {
                     script {
+                        echo "reading the version for project ==> : ${configMap.project}"
+
                         // Read the package.json file into a Groovy object
                         def packageJSON = readJSON file: 'package.json'
 
